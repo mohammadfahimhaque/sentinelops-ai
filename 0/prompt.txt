@@ -1,0 +1,41 @@
+You are a senior SRE and Python backend engineer building SentinelOps AI for neatHack 2026.
+
+TASK: Implement Milestone 4 — a reproducible PostgreSQL checkout performance incident simulator.
+
+CURRENT ENVIRONMENT:
+- Ubuntu WSL with Docker Desktop integration.
+- Existing postgres-dev container uses host port 5432.
+- Other containers use ports 27017 and 6379.
+- Entire is configured with Codex hooks.
+- The FastAPI backend is working.
+- There are 37 passing incident-model tests.
+
+REQUIREMENTS:
+1. Inspect the current repository first. Preserve the existing FastAPI app, incident models, tests, and Entire hooks.
+2. Create docker-compose.yml using PostgreSQL 17, with container name sentinelops-postgres, host binding 127.0.0.1:5433:5432, a named volume, health check, and credentials from environment variables.
+3. Provide a .env.example with nonproduction demo credentials. Never commit actual credentials.
+4. Build a simulator that creates 100,000 deterministic synthetic orders with customer_email, status, total_amount, and created_at fields.
+5. Ensure customer_email is initially unindexed.
+6. Implement a parameterized checkout lookup by customer_email.
+7. Implement repeatable benchmarks capturing measured p50/p95 latency, sample count, and EXPLAIN (ANALYZE, BUFFERS) plans before and after the repair.
+8. Implement a strictly allowlisted repair for an index on orders(customer_email). Do not execute arbitrary LLM-generated SQL.
+9. Include a safe reset operation that removes only the demo index, restores the incident, and never drops the database or unrelated objects.
+10. Verify that results before and after remediation are identical.
+11. Build unit tests and opt-in PostgreSQL integration tests for the full incident-to-recovery cycle. Skip database tests clearly when the test database is unavailable.
+12. Add a command-line interface for seed, benchmark, repair, reset, and verification.
+13. Add clear setup and execution instructions to README.md.
+14. Ensure compatibility with the current Python environment. Avoid unnecessary infrastructure and dependencies.
+15. Run the tests and report results.
+
+SECURITY:
+- Never stop, delete, or modify existing mongo-dev, redis-dev, or postgres-dev containers.
+- Never bind PostgreSQL to 0.0.0.0.
+- Never hardcode real secrets.
+- Never use real customer information.
+- Never commit or push automatically.
+- Don't edit .codex/hooks.json or .entire settings.
+
+SUCCESS CRITERIA:
+A real, measurable database query slowdown caused by a missing index, followed by a verified improvement after creating the index.
+
+Start implementation now.

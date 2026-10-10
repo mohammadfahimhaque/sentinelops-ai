@@ -1,0 +1,36 @@
+{
+  "cli_version": "0.11.4",
+  "checkpoint_id": "01M4K21JCGQ81MFQP7XPM8YTKZ",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    ".env.example",
+    "README.md",
+    "docker-compose.yml",
+    "pytest.ini",
+    "simulator/__init__.py",
+    "simulator/__main__.py",
+    "simulator/core.py",
+    "simulator/requirements.txt",
+    "simulator/tests/test_postgres.py",
+    "simulator/tests/test_simulator.py"
+  ],
+  "sessions": [
+    {
+      "metadata": "/0/metadata.json",
+      "transcript": "/0/full.jsonl",
+      "compact_transcript": "/0/transcript.jsonl",
+      "content_hash": "/0/content_hash.txt",
+      "prompt": "/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 18951,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 245632,
+    "output_tokens": 8337,
+    "api_call_count": 11,
+    "subagent_tokens_complete": true
+  }
+}

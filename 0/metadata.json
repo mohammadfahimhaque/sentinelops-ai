@@ -1,0 +1,61 @@
+{
+  "cli_version": "0.11.4",
+  "checkpoint_id": "01M4K21JCGQ81MFQP7XPM8YTKZ",
+  "session_id": "01a1260e-cdd8-7840-b7a9-15329435720a",
+  "strategy": "manual-commit",
+  "created_at": "2026-10-10T14:05:56.105636172Z",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "save_step_count": 1,
+  "files_touched": [
+    ".env.example",
+    "README.md",
+    "docker-compose.yml",
+    "pytest.ini",
+    "simulator/__init__.py",
+    "simulator/__main__.py",
+    "simulator/core.py",
+    "simulator/requirements.txt",
+    "simulator/tests/test_postgres.py",
+    "simulator/tests/test_simulator.py"
+  ],
+  "agent": "Codex",
+  "model": "gpt-6-astra",
+  "turn_id": "ab9ba14cd636",
+  "compact_transcript_start": 0,
+  "token_usage": {
+    "input_tokens": 18951,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 245632,
+    "output_tokens": 8337,
+    "api_call_count": 11,
+    "subagent_tokens_complete": true
+  },
+  "session_metrics": {
+    "turn_count": 1
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-10-10T14:05:56.087805843Z",
+    "agent_lines": 565,
+    "agent_removed": 0,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 565,
+    "total_lines_changed": 565,
+    "agent_percentage": 100,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 88,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        ".codex/hooks.json": 88
+      }
+    }
+  ]
+}
