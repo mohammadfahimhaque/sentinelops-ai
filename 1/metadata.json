@@ -1,0 +1,81 @@
+{
+  "cli_version": "0.11.4",
+  "checkpoint_id": "01M4KCQ5PXE4TV6HGN140EZC4G",
+  "session_id": "01a1266d-9f80-7a73-bfc0-0dcb61eb0597",
+  "strategy": "manual-commit",
+  "created_at": "2026-10-10T17:10:42.789620447Z",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "save_step_count": 1,
+  "files_touched": [
+    ".env.example",
+    ".gitignore",
+    "README.md",
+    "backend/app/main.py",
+    "backend/app/models.py",
+    "backend/app/telemetry.py",
+    "backend/tests/test_telemetry.py",
+    "scripts/verify_neatlogs.py",
+    "simulator/core.py"
+  ],
+  "agent": "Codex",
+  "model": "gpt-6-astra",
+  "turn_id": "ec15c06d6e26",
+  "compact_transcript_start": 0,
+  "token_usage": {
+    "input_tokens": 89626,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 2298624,
+    "output_tokens": 21095,
+    "api_call_count": 38,
+    "subagent_tokens_complete": true
+  },
+  "session_metrics": {
+    "turn_count": 1
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-10-10T17:10:42.755779164Z",
+    "agent_lines": 662,
+    "agent_removed": 0,
+    "human_added": 317,
+    "human_modified": 57,
+    "human_removed": 0,
+    "total_committed": 1026,
+    "total_lines_changed": 1036,
+    "agent_percentage": 63.899613899613904,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 1734,
+      "user_lines_removed": 9,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        ".codex/hooks.json": 88,
+        ".env.example": 7,
+        ".gitignore": 1,
+        "README.md": 92,
+        "backend/app/agent.py": 176,
+        "backend/app/agent_state.py": 46,
+        "backend/app/agent_tools.py": 47,
+        "backend/app/main.py": 62,
+        "backend/app/models.py": 2,
+        "backend/app/provider.py": 44,
+        "backend/requirements.txt": 6,
+        "backend/tests/test_agent.py": 246,
+        "backend/tests/test_agent_postgres.py": 60,
+        "evidence/live-incident-before.json": 190,
+        "evidence/milestone4-verification.json": 618,
+        "scripts/agent_demo.py": 25,
+        "simulator/core.py": 24
+      },
+      "user_removed_per_file": {
+        "README.md": 1,
+        "backend/app/main.py": 1,
+        "simulator/core.py": 7
+      }
+    }
+  ]
+}

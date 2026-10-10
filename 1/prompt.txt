@@ -1,0 +1,41 @@
+You are a senior AI observability engineer working on SentinelOps AI for neatHack 2026.
+
+Our SentinelOps AI backend already works:
+- FastAPI incident-response API
+- Real LLM tool-calling investigation through backend/app/provider.py
+- PostgreSQL incident simulator
+- Human-approved safe database repair
+- 90 passing tests
+- Entire/Codex checkpoints
+
+TASK: Integrate neatlogs observability into the working application.
+
+FIRST:
+1. Inspect the existing code and environment without printing secrets.
+2. Consult the official neatlogs integration guide at https://neatlogs.com/hackathon/neatlogs-setup-guide.html and documentation at https://docs.neatlogs.com/llms.txt.
+3. Determine the officially supported approach for our custom Python httpx OpenAI-compatible model client. The old public neatlogs PyPI package version 1.1.8 lacks documented newer SDK features. Do not assume those functions exist.
+4. Confirm whether NEATLOGS_API_KEY is set without displaying its value.
+
+IMPLEMENT:
+5. Instrument LLM model requests, responses, tool calls, tool results, errors, retries, approval decisions and recovery verification.
+6. Correlate all events using incident_id and trace/session identifiers.
+7. Never record API keys, Authorization headers, passwords, or other secrets.
+8. Do not modify agent decision logic or remove the human approval requirement.
+9. Keep neatlogs telemetry failures from interrupting incident response.
+10. Add automated tests using mock telemetry clients.
+
+VERIFY:
+11. Run all available tests.
+12. Configure the official neatlogs Project API key via NEATLOGS_API_KEY.
+13. Execute or guide a real instrumented SentinelOps investigation and verify a finalized trace appears in the neatlogs dashboard.
+14. Record the real trace ID, supported tool spans, and any remaining blockers.
+15. Update README with integration and verification instructions.
+
+IMPORTANT:
+- Do not execute arbitrary SQL.
+- Do not modify unrelated Docker containers.
+- Do not commit or push automatically.
+- Never print credentials.
+- If integration details are unclear, report the blocker rather than inventing an API.
+
+SUCCESS CRITERIA: A real SentinelOps investigation produces a visible neatlogs trace with genuine LLM and tool activity.
