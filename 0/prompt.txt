@@ -1,0 +1,24 @@
+You are a senior Python backend engineer working on SentinelOps AI, an autonomous incident-response system for neatHack 2026.
+
+**Task: Implement the foundational incident data model and tests.**
+
+Requirements:
+
+1. Inspect the existing project before modifying files.
+2. Preserve the existing working FastAPI application.
+3. Create `backend/app/models.py` using Pydantic.
+4. Define an `Incident` model with:
+   - `incident_id`: string
+   - `service_name`: string
+   - `severity`: enum (low, medium, high, critical)
+   - `status`: enum (detected, investigating, awaiting_approval, recovering, resolved, failed)
+   - `description`: string
+   - `created_at`: timezone-aware UTC timestamp
+5. Create `backend/tests/test_models.py` with pytest tests for valid incidents, invalid severity/status values, and timestamp behavior.
+6. Run the tests and fix any errors.
+7. Do not install unnecessary dependencies.
+8. Do not modify unrelated files.
+9. Do not commit or push changes.
+10. Summarize the implementation and test results.
+
+Follow clean-code principles, use type hints, and keep the implementation minimal but production-minded.
