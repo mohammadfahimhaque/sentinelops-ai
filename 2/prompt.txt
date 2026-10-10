@@ -1,0 +1,36 @@
+You are a senior OpenTelemetry and AI observability engineer debugging SentinelOps AI for neatHack 2026.
+
+**Problem:** Our custom Python OpenTelemetry integration sends spans successfully to neatlogs, but traces remain stuck on "Trace is processing" for over 40 minutes.
+
+Known evidence:
+- Trace ID: `96a9dd862d07e87fa8a1e1261f185cdb`
+- `transport_accepted_spans: 3`
+- `transport_failed_spans: 0`
+- `export_queue_drained: true`
+- `dashboard_finalization: unverified`
+- neatlogs dashboard displays four traces, but they cannot be opened.
+- Python 3.14, FastAPI, custom httpx LiteLLM provider, OpenTelemetry OTLP/gRPC exporter.
+- The existing autonomous investigation and repair workflow has been successfully verified.
+- The test suite previously passed 101 tests, with six opt-in PostgreSQL tests.
+
+**Your task:**
+
+1. Inspect `backend/app/telemetry.py`, its integration points, and `scripts/verify_neatlogs.py`.
+2. Read the current official documentation:
+   - https://docs.neatlogs.com/sdk/opentelemetry
+   - https://docs.neatlogs.com/sdk/http-injection
+   - https://docs.neatlogs.com/sdk/doctor
+3. Verify the OTLP endpoint, authentication metadata, root and child span relationships, span kind attributes, OpenTelemetry GenAI semantic conventions, lifecycle, and export completion.
+4. Investigate whether traces are being ingested as unsupported or incomplete span hierarchies.
+5. Determine whether the documented HTTP trace-injection approach would provide a more reliable fallback for our custom Python agent. If using it, send exactly one nested trace per completed workflow, not one request per span.
+6. Preserve the existing LLM reasoning, PostgreSQL simulator, human approval, safety allowlist, and Entire integration.
+7. Add automated tests for whichever tracing correction is required.
+8. Test a minimal, non-sensitive trace separately from the full incident workflow.
+9. Verify finalization through the documented authenticated readback mechanism or the dashboard. Do not equate successful transport with finalization.
+10. Never print, record or commit API keys or secrets.
+11. Do not commit or push automatically.
+12. If trace finalization remains blocked, report the exact findings and provide a concise diagnostic message for the neatlogs organisers.
+
+Do not make speculative changes without identifying supporting evidence.
+
+**Success criterion:** One real SentinelOps investigation trace is finalized and its LLM and tool spans are visible in neatlogs.
