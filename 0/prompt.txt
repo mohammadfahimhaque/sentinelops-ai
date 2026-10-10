@@ -1,0 +1,41 @@
+You are a senior AI agent engineer and SRE building SentinelOps AI for neatHack 2026.
+
+MILESTONE 5: Implement a genuine autonomous incident investigation agent using the existing PostgreSQL simulator.
+
+CURRENT STATE:
+- FastAPI backend and Pydantic Incident model exist.
+- 59 tests passed, including real PostgreSQL integration tests.
+- The simulator demonstrates a measured p95 speedup of approximately 12.15x after repairing a missing orders(customer_email) index.
+- Docker PostgreSQL 17 is isolated on 127.0.0.1:5433.
+- GitHub and Entire Codex hooks are configured and working.
+
+IMPLEMENTATION REQUIREMENTS:
+
+1. Inspect all existing code first. Reuse simulator/core.py and its public functions; don't duplicate SQL or benchmark logic.
+2. Implement a single LLM-powered investigation agent in backend/app/agent.py, plus modular tools and structured state as needed.
+3. Use a real model provider behind a configurable adapter. Prefer an OpenAI-compatible API or an available provider configured through environment variables. Never embed credentials and don't assume a model key is present.
+4. Give the agent read-only tools for metrics, PostgreSQL EXPLAIN evidence, schema/index inspection and incident history.
+5. The LLM must actually select its next investigative tool based on observations. Do not hardcode the root cause or force a fixed chain of investigation tool calls.
+6. Implement a bounded tool-calling loop: maximum steps, timeout, retries with backoff for transient errors, and clear termination.
+7. Require a structured diagnosis citing actual observed evidence and a confidence assessment. If evidence is insufficient, escalate rather than invent a diagnosis.
+8. The agent may only propose repair ID create_checkout_email_index. The backend independently validates the proposal. Never execute LLM-generated SQL or shell commands.
+9. Add a human approval boundary. Investigation must halt with status awaiting_approval, and repair must not run without explicit approval.
+10. Following approval, the backend executes the allowlisted repair, reruns a measured benchmark, compares query correctness and performance, and returns resolved or failed with evidence.
+11. Persist incident state and a timestamped event timeline locally in a minimal, safe format appropriate for this demo. Do not leak secrets or arbitrary tool output.
+12. Add minimal FastAPI endpoints to create an incident, investigate, inspect state, approve/reject, and obtain a report. Preserve existing / and /health endpoints.
+13. Unit test model tool selection (with deterministic mock model responses), approval enforcement, unauthorized operations, refusal, insufficient evidence, tool failures, and verified recovery. Add opt-in PostgreSQL integration tests.
+14. Create an example agent demo script and concise README instructions. Explain all required model environment variables.
+15. Design the agent so neatlogs instrumentation can be added around model calls, tool calls and incident lifecycle events without restructuring.
+16. Run all available tests, report any skipped integration tests and provider limitations.
+
+SAFETY:
+- Operate only on the SentinelOps demo PostgreSQL database on 127.0.0.1:5433.
+- Never touch postgres-dev, mongo-dev or redis-dev.
+- Do not make destructive database changes.
+- Do not reveal or commit secrets.
+- Do not edit Entire hooks.
+- Do not commit or push automatically.
+- Never claim a live LLM investigation succeeded if only mock tests ran.
+
+SUCCESS CRITERIA:
+The system starts from a genuinely degraded checkout lookup; the LLM autonomously chooses investigative tools, proposes an evidence-based safe repair, waits for explicit human approval, executes only the allowlisted action, and independently verifies recovery.

@@ -1,0 +1,66 @@
+{
+  "cli_version": "0.11.4",
+  "checkpoint_id": "01M4KCQ5PXE4TV6HGN140EZC4G",
+  "session_id": "01a12638-571f-7d82-86a9-fb76b9e93507",
+  "strategy": "manual-commit",
+  "created_at": "2026-10-10T17:10:42.177220734Z",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "save_step_count": 1,
+  "files_touched": [
+    ".env.example",
+    ".gitignore",
+    "README.md",
+    "backend/app/agent.py",
+    "backend/app/agent_state.py",
+    "backend/app/agent_tools.py",
+    "backend/app/main.py",
+    "backend/app/models.py",
+    "backend/app/provider.py",
+    "backend/requirements.txt",
+    "backend/tests/test_agent.py",
+    "backend/tests/test_agent_postgres.py",
+    "scripts/agent_demo.py",
+    "simulator/core.py"
+  ],
+  "agent": "Codex",
+  "model": "gpt-6-astra",
+  "turn_id": "13bd59d71ee4",
+  "compact_transcript_start": 0,
+  "token_usage": {
+    "input_tokens": 70366,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 715904,
+    "output_tokens": 14014,
+    "api_call_count": 21,
+    "subagent_tokens_complete": true
+  },
+  "session_metrics": {
+    "turn_count": 1
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-10-10T17:10:42.15256465Z",
+    "agent_lines": 1009,
+    "agent_removed": 9,
+    "human_added": 854,
+    "human_modified": 10,
+    "human_removed": 0,
+    "total_committed": 1873,
+    "total_lines_changed": 1882,
+    "agent_percentage": 54.091392136025505,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 706,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        ".codex/hooks.json": 88,
+        "evidence/milestone4-verification.json": 618
+      }
+    }
+  ]
+}

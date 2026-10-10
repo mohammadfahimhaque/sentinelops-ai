@@ -1,0 +1,40 @@
+{
+  "cli_version": "0.11.4",
+  "checkpoint_id": "01M4KCQ5PXE4TV6HGN140EZC4G",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    ".env.example",
+    ".gitignore",
+    "README.md",
+    "backend/app/agent.py",
+    "backend/app/agent_state.py",
+    "backend/app/agent_tools.py",
+    "backend/app/main.py",
+    "backend/app/models.py",
+    "backend/app/provider.py",
+    "backend/requirements.txt",
+    "backend/tests/test_agent.py",
+    "backend/tests/test_agent_postgres.py",
+    "scripts/agent_demo.py",
+    "simulator/core.py"
+  ],
+  "sessions": [
+    {
+      "metadata": "/0/metadata.json",
+      "transcript": "/0/full.jsonl",
+      "compact_transcript": "/0/transcript.jsonl",
+      "content_hash": "/0/content_hash.txt",
+      "prompt": "/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 70366,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 715904,
+    "output_tokens": 14014,
+    "api_call_count": 21,
+    "subagent_tokens_complete": true
+  }
+}
