@@ -1,6 +1,6 @@
 -r ../simulator/requirements.txt
 fastapi>=0.115,<1
-pydantic>=2,<3
+pydantic>=2.14.0,<3
 httpx>=0.28,<1
 uvicorn>=0.30,<1
 pytest>=8,<10
