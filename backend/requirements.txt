@@ -1,5 +1,5 @@
 -r ../simulator/requirements.txt
-fastapi>=0.115,<1
+fastapi>=0.143.0,<1
 pydantic>=2,<3
 httpx>=0.28,<1
 uvicorn>=0.30,<1
