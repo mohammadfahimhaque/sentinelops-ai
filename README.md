@@ -17,11 +17,12 @@ See [Production and continuous delivery](docs/PRODUCTION.md) for Docker setup an
 ## Local setup
 
 Run from the repository root on Ubuntu/WSL with Docker Desktop integration.
-Use the existing Python virtual environment (Python 3.10+):
+Create a Python virtual environment (Python 3.12 is used in CI):
 
 ```bash
+python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r simulator/requirements.txt
+python -m pip install -r backend/requirements.txt
 # Only if .env does not already exist:
 cp -n .env.example .env
 docker compose up -d --wait postgres
@@ -126,8 +127,11 @@ SENTINELOPS_TEST_POSTGRES=1 python -m pytest -q -rs
 The integration tests cover seeding, measured before/after performance, identical
 lookup results, actual planner index use, idempotency, restoring the sequential
 scan, SQL parameterization, index-name collision protection, and preservation of
-rows and unrelated indexes. They run in rollback-only transactions, restoring the
-prior database state after each test. When opted in but credentials or the local
+rows and unrelated indexes. Most run in rollback-only transactions, restoring the
+prior database state after each test. The production read-tool test instead creates
+a uniquely named disposable database and commits its seed so independent read-only
+connections can see it; teardown drops only that owned database. The local test
+role needs CREATEDB (the Compose and CI roles already have it). When opted in but credentials or the local
 test database are unavailable, they skip with a clear reason. Schema errors and
 failed performance/correctness assertions fail rather than silently skipping.
 These tests mutate the demo schema temporarily: use only this isolated fixture.
@@ -253,7 +257,7 @@ without installing that incompatible SDK.
 ### Configuration
 
 Install `backend/requirements.txt`. Put the **Project API key** from your
-project's Settings → API keys in `NEATLOGS_API_KEY` in the ignored `.env` or your
+project's Settings â†’ API keys in `NEATLOGS_API_KEY` in the ignored `.env` or your
 process environment. Never paste the key into code, command arguments, reports,
 or chat. The existing environment key is reused; no credential is copied into
 tracked files. Do not use the `nlw_` HTTP-ingest key with this integration.

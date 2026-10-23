@@ -20,6 +20,7 @@ export function WorkspaceShowcase({ compact = false }: { compact?: boolean }) {
         </div>
       </div>
       <div className="device-phone">
+        <div className="device-phone-camera" />
         <div className="device-phone-screen">
           <img
             src="/images/workspace-mobile.png"

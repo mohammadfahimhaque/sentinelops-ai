@@ -2,9 +2,11 @@
 
 import os
 from pathlib import Path
+from uuid import uuid4
 
 from dotenv import load_dotenv
 import psycopg
+from psycopg import sql
 import pytest
 
 from simulator import core
@@ -13,7 +15,7 @@ pytestmark = pytest.mark.postgres
 
 
 @pytest.fixture
-def db():
+def postgres_connection():
     if os.environ.get("SENTINELOPS_TEST_POSTGRES") != "1":
         pytest.skip("PostgreSQL integration tests are opt-in: set SENTINELOPS_TEST_POSTGRES=1")
     load_dotenv(Path(__file__).resolve().parents[2] / ".env", override=False)
@@ -25,9 +27,34 @@ def db():
     except psycopg.OperationalError:
         pytest.skip("PostgreSQL demo test database unavailable at 127.0.0.1:5433")
     with conn:
-        # Roll back all integration-test changes, including index creation/removal.
-        with conn.transaction(force_rollback=True):
+        yield conn
+
+
+@pytest.fixture
+def db(postgres_connection):
+    with postgres_connection.transaction(force_rollback=True):
+        yield postgres_connection
+
+
+@pytest.fixture
+def committed_db(postgres_connection, monkeypatch):
+    """Commit setup in an owned disposable database for independent readers.
+
+    Requires CREATEDB on the opt-in local test role. The existing demo database
+    is never seeded or reset by this fixture.
+    """
+    name = "sentinelops_test_" + uuid4().hex
+    identifier = sql.Identifier(name)
+    postgres_connection.execute(
+        sql.SQL("CREATE DATABASE {} TEMPLATE template0").format(identifier)
+    )
+    try:
+        monkeypatch.setenv("POSTGRES_DB", name)
+        with core.connect() as conn:
+            core.seed(conn)
             yield conn
+    finally:
+        postgres_connection.execute(sql.SQL("DROP DATABASE {}").format(identifier))
 
 
 def test_full_incident_to_recovery_cycle(db):
