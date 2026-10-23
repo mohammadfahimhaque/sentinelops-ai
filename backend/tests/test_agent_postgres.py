@@ -4,7 +4,9 @@ from contextlib import nullcontext
 import pytest
 
 from simulator import core
-from simulator.tests.test_postgres import db, committed_db  # Shared opt-in fixtures.
+from simulator.tests.test_postgres import (
+    db, committed_db, postgres_connection,  # Shared opt-in fixtures and dependencies.
+)
 from backend.app.agent_tools import DatabaseTools, metrics_summary, plan_summary
 from backend.app.agent import Agent
 from backend.app.agent_state import Store
